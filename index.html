@@ -1,58 +1,350 @@
-<!--MAIN-->
-<main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
 
-    <!--NAV-->
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e91e63;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://picsum.photos/1920/1080') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .about.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #e91e63;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+        }
+
+        .portfolio h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #e91e63;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .overlay span {
+            color: #fff;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Contact Section */
+        .contact {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .contact.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact h2 {
+            margin-bottom: 2rem;
+            color: #e91e63;
+        }
+
+        .contact p {
+            margin-bottom: 1rem;
+        }
+
+        .contact a {
+            color: #e91e63;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links a {
+                margin-left: 1rem;
+            }
+
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
     <nav>
-        <a href="javascript:void(0)" class="logo">
-            <img src="https://raw.githubusercontent.com/bboysdreamsfell/HeroSection_1/refs/heads/main/assets/images/logo.png" alt="" />
-        </a>
-        <ul class="links">
-            <li><a href="javascript:void(0)" class="active" onclick="package('popup', 'warning' ,'Currently you are on the home page')">Home</a></li>
-            <li><a href="javascript:void(0)">Our work</a></li>
-            <li><a href="javascript:void(0)">Articles</a></li>
-            <li><a href="javascript:void(0)">About us</a></li>
-        </ul>
-        <ul class="icon_buttons">
-            <li>
-                <a href="javascript:void(0)" class="icon_btn btn btn_1" onclick="package('popup', 'warning' ,'Contact page under construction')">
-                    <iconify-icon icon="cbi:aqara-contact" class="icon"></iconify-icon>
-                    <span class="btn_1_sub text">Contact us</span>
-                </a>
-            </li>
-        </ul>
+        <div class="nav-container">
+            <div class="logo">Jane Doe</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
     </nav>
-    
-    <!--HEADER-->
-    <header>
-        <section class="flex">
-            <article class="flex_content padding_2">
-                <h1  class="title big linear_text">Be Aware, Connect With Care</h1>
-                <p>Practise good cyber hygine by updating software and using strong passwords.</p>
-            </article>
-            <figure class="flex_content">
-                <img src="https://raw.githubusercontent.com/bboysdreamsfell/HeroSection_1/refs/heads/main/assets/images/hero.jpg" alt="" />
-            </figure>
-            <aside class="flex_content padding_2">
-                <ul class="lists">
-                    <li class="list">Pause Before You Post</li>
-                    <li class="list">Verify Before You Share</li>
-                    <li class="list">Check Before You Connect</li>
-                </ul>
-            </aside>
-        </section>
-    </header>
-    
-    <!--FOOTER-->
-    <footer></footer>
 
-</main>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Jane Doe - Model</h1>
+            <p>Welcome to my portfolio. Explore my work and get in touch for collaborations.</p>
+        </div>
+    </section>
 
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <p>I'm Jane Doe, a professional model with a passion for fashion and photography. With years of experience in runway, editorial, and commercial modeling, I bring versatility and professionalism to every project. My goal is to create captivating visuals that tell a story.</p>
+    </section>
 
-<!--REMOVE THIS-->
-<aside class="credits">
-  Credits: 
-  <a href="https://unsplash.com/photos/blue-and-black-mask-illustration-BxELNNMN88Y" target="_blank"><iconify-icon icon="ri:unsplash-fill"></iconify-icon> Unsplash</a> <br>
-  
-  Source:
-  <a href="https://github.com/bboysdreamsfell/HeroSection_1" target="_blank"><iconify-icon icon="mdi:github"></iconify-icon> Github</a>
-</aside>
+    <section class="portfolio" id="portfolio">
+        <h2>My Portfolio</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=1" alt="Portfolio Image 1">
+                <div class="overlay"><span>Editorial Shoot</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=2" alt="Portfolio Image 2">
+                <div class="overlay"><span>Fashion Runway</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=3" alt="Portfolio Image 3">
+                <div class="overlay"><span>Commercial Ad</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=4" alt="Portfolio Image 4">
+                <div class="overlay"><span>Portrait Session</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Contact Me</h2>
+        <p>For bookings and inquiries, reach out via email.</p>
+        <p>Email: <a href="mailto:jane.doe@example.com">jane.doe@example.com</a></p>
+        <p>Phone: (123) 456-7890</p>
+    </section>
+
+    <script>
+        // Smooth scrolling for nav links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('href');
+                document.querySelector(sectionId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal for sections
+        const sections = document.querySelectorAll('.about, .contact');
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
