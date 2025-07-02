@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model Portfolio</title>
+    <title>Navarro Sam's Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
         body {
             line-height: 1.6;
             color: #333;
-            background-color: #f4f4f4;
+            background-color: #e6f4ea;
         }
 
         /* Navigation */
@@ -45,18 +45,18 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #333;
+            color: #2e7d32;
         }
 
         .nav-links a {
-            color: #333;
+            color: #2e7d32;
             text-decoration: none;
             margin-left: 2rem;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #e91e63;
+            color: #4caf50;
         }
 
         /* Hero Section */
@@ -65,7 +65,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: url('https://picsum.photos/1920/1080') no-repeat center center/cover;
+            background: url('https://iili.io/FYeZQwB.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
             position: relative;
@@ -78,7 +78,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(46, 125, 50, 0.5);
         }
 
         .hero-content {
@@ -120,7 +120,31 @@
         .about h2 {
             text-align: center;
             margin-bottom: 2rem;
-            color: #e91e63;
+            color: #2e7d32;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            flex: 1;
         }
 
         /* Portfolio Section */
@@ -133,7 +157,7 @@
         .portfolio h2 {
             text-align: center;
             margin-bottom: 2rem;
-            color: #e91e63;
+            color: #2e7d32;
         }
 
         .gallery {
@@ -167,7 +191,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(46, 125, 50, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -206,7 +230,7 @@
 
         .contact h2 {
             margin-bottom: 2rem;
-            color: #e91e63;
+            color: #2e7d32;
         }
 
         .contact p {
@@ -214,7 +238,7 @@
         }
 
         .contact a {
-            color: #e91e63;
+            color: #4caf50;
             text-decoration: none;
             font-weight: bold;
         }
@@ -248,13 +272,23 @@
             .gallery-item img {
                 height: 200px;
             }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-container">
-            <div class="logo">Jane Doe</div>
+            <div class="logo">Navarro Sam</div>
             <div class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
@@ -266,34 +300,93 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Jane Doe - Model</h1>
+            <h1>Navarro Sam</h1>
             <p>Welcome to my portfolio. Explore my work and get in touch for collaborations.</p>
         </div>
     </section>
 
     <section class="about" id="about">
-        <h2>About Me</h2>
-        <p>I'm Jane Doe, a professional model with a passion for fashion and photography. With years of experience in runway, editorial, and commercial modeling, I bring versatility and professionalism to every project. My goal is to create captivating visuals that tell a story.</p>
+ <h2>About Me</h2>
+<div class="about-content">
+    <img class="profile-pic" src="https://iili.io/FYeZUGe.md.jpg" alt="Profile Picture">
+    <div class="about-text">
+        <p>I'm Navarro Sam, a professional model with a passion for fashion and photography. With years of experience in runway, editorial, and commercial modeling, I bring versatility and professionalism to every project. My goal is to create captivating visuals that tell a story.</p>
+        <table>
+            <tr>
+                <td><strong>Age:</strong></td>
+                <td>38</td>
+            </tr>
+            <tr>
+                <td><strong>Height:</strong></td>
+                <td>5'2"</td>
+            </tr>
+            <tr>
+                <td><strong>Weight:</strong></td>
+                <td>58</td>
+            </tr>
+            <tr>
+                <td><strong>Location:</strong></td>
+                <td>Dubai</td>
+            </tr>
+            <tr>
+                <td><strong>Hobbies:</strong></td>
+                <td>Traveling</td>
+            </tr>
+        </table>
+    </div>
+</div>
     </section>
 
     <section class="portfolio" id="portfolio">
         <h2>My Portfolio</h2>
         <div class="gallery">
             <div class="gallery-item">
-                <img src="https://picsum.photos/400/300?random=1" alt="Portfolio Image 1">
-                <div class="overlay"><span>Editorial Shoot</span></div>
+                <img src="https://iili.io/FYkochP.md.jpg" alt="Portfolio Image 1">
+                <div class="overlay"><span>Editorial Shoot 1</span></div>
             </div>
             <div class="gallery-item">
-                <img src="https://picsum.photos/400/300?random=2" alt="Portfolio Image 2">
-                <div class="overlay"><span>Fashion Runway</span></div>
+                <img src="https://iili.io/FYetqMX.md.jpg" alt="Portfolio Image 2">
+                <div class="overlay"><span>Fashion Runway 1</span></div>
             </div>
             <div class="gallery-item">
-                <img src="https://picsum.photos/400/300?random=3" alt="Portfolio Image 3">
-                <div class="overlay"><span>Commercial Ad</span></div>
+                <img src="https://iili.io/FYet2up.md.jpg" alt="Portfolio Image 3">
+                <div class="overlay"><span>Commercial Ad 1</span></div>
             </div>
             <div class="gallery-item">
-                <img src="https://picsum.photos/400/300?random=4" alt="Portfolio Image 4">
-                <div class="overlay"><span>Portrait Session</span></div>
+                <img src="https://iili.io/FYetd9R.md.jpg" alt="Portfolio Image 4">
+                <div class="overlay"><span>Portrait Session 1</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYetH8v.md.jpg" alt="Portfolio Image 5">
+                <div class="overlay"><span>Editorial Shoot 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZDn1.md.jpg" alt="Portfolio Image 6">
+                <div class="overlay"><span>Fashion Runway 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZLuV.md.jpg" alt="Portfolio Image 7">
+                <div class="overlay"><span>Commercial Ad 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZ6aj.md.jpg" alt="Portfolio Image 8">
+                <div class="overlay"><span>Portrait Session 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZyFa.md.jpg" alt="Portfolio Image 9">
+                <div class="overlay"><span>Editorial Shoot 3</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZSn9.md.jpg" alt="Portfolio Image 10">
+                <div class="overlay"><span>Fashion Runway 3</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZbMF.md.jpg" alt="Portfolio Image 11">
+                <div class="overlay"><span>Commercial Ad 3</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZvZ7.md.jpg" alt="Portfolio Image 12">
+                <div class="overlay"><span>Portrait Session 3</span></div>
             </div>
         </div>
     </section>
@@ -301,8 +394,8 @@
     <section class="contact" id="contact">
         <h2>Contact Me</h2>
         <p>For bookings and inquiries, reach out via email.</p>
-        <p>Email: <a href="mailto:jane.doe@example.com">jane.doe@example.com</a></p>
-        <p>Phone: (123) 456-7890</p>
+        <p>Email: <a href="mailto:navarrosam031987@gmail.com">navarrosam031987@gmail.com</a></p>
+        <p>Phone: +971 554267923</p>
     </section>
 
     <script>
@@ -310,10 +403,14 @@
         document.querySelectorAll('.nav-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const sectionId = this.getAttribute('href');
-                document.querySelector(sectionId).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const sectionId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
