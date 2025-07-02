@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navarro Sam's Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #e6f4ea;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .nav-links a {
+            color: #2e7d32;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4caf50;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://iili.io/FYeZQwB.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(46, 125, 50, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .about.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2e7d32;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+        }
+
+        .portfolio h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2e7d32;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(46, 125, 50, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .overlay span {
+            color: #fff;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Contact Section */
+        .contact {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .contact.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact h2 {
+            margin-bottom: 2rem;
+            color: #2e7d32;
+        }
+
+        .contact p {
+            margin-bottom: 1rem;
+        }
+
+        .contact a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links a {
+                margin-left: 1rem;
+            }
+
+            .gallery-item img {
+                height: 200px;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Navarro Sam</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Navarro Sam</h1>
+            <p>Welcome to my portfolio. Explore my work and get in touch for collaborations.</p>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+ <h2>About Me</h2>
+<div class="about-content">
+    <img class="profile-pic" src="https://iili.io/FYeZUGe.md.jpg" alt="Profile Picture">
+    <div class="about-text">
+        <p>I'm Navarro Sam, a professional model with a passion for fashion and photography. With years of experience in runway, editorial, and commercial modeling, I bring versatility and professionalism to every project. My goal is to create captivating visuals that tell a story.</p>
+        <table>
+            <tr>
+                <td><strong>Age:</strong></td>
+                <td>38</td>
+            </tr>
+            <tr>
+                <td><strong>Height:</strong></td>
+                <td>5'2"</td>
+            </tr>
+            <tr>
+                <td><strong>Weight:</strong></td>
+                <td>58</td>
+            </tr>
+            <tr>
+                <td><strong>Location:</strong></td>
+                <td>Dubai</td>
+            </tr>
+            <tr>
+                <td><strong>Hobbies:</strong></td>
+                <td>Traveling</td>
+            </tr>
+        </table>
+    </div>
+</div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <h2>My Portfolio</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://iili.io/FYkochP.md.jpg" alt="Portfolio Image 1">
+                <div class="overlay"><span>Editorial Shoot 1</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYetqMX.md.jpg" alt="Portfolio Image 2">
+                <div class="overlay"><span>Fashion Runway 1</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYet2up.md.jpg" alt="Portfolio Image 3">
+                <div class="overlay"><span>Commercial Ad 1</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYetd9R.md.jpg" alt="Portfolio Image 4">
+                <div class="overlay"><span>Portrait Session 1</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYetH8v.md.jpg" alt="Portfolio Image 5">
+                <div class="overlay"><span>Editorial Shoot 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZDn1.md.jpg" alt="Portfolio Image 6">
+                <div class="overlay"><span>Fashion Runway 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZLuV.md.jpg" alt="Portfolio Image 7">
+                <div class="overlay"><span>Commercial Ad 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZ6aj.md.jpg" alt="Portfolio Image 8">
+                <div class="overlay"><span>Portrait Session 2</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZyFa.md.jpg" alt="Portfolio Image 9">
+                <div class="overlay"><span>Editorial Shoot 3</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZSn9.md.jpg" alt="Portfolio Image 10">
+                <div class="overlay"><span>Fashion Runway 3</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZbMF.md.jpg" alt="Portfolio Image 11">
+                <div class="overlay"><span>Commercial Ad 3</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://iili.io/FYeZvZ7.md.jpg" alt="Portfolio Image 12">
+                <div class="overlay"><span>Portrait Session 3</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Contact Me</h2>
+        <p>For bookings and inquiries, reach out via email.</p>
+        <p>Email: <a href="mailto:navarrosam031987@gmail.com">navarrosam031987@gmail.com</a></p>
+        <p>Phone: +971 554267923</p>
+    </section>
+
+    <script>
+        // Smooth scrolling for nav links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal for sections
+        const sections = document.querySelectorAll('.about, .contact');
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
