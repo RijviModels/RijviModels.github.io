@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navarro Sam's Portfolio</title>
+    <title>RiJvi MOdels</title>
     <style>
         * {
             margin: 0;
@@ -13,241 +13,173 @@
         }
 
         body {
-            line-height: 1.6;
+            background: linear-gradient(135deg, #fce2e6, #ffd1dc);
             color: #333;
-            background-color: #e6f4ea;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
-        nav {
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        header {
+            background: rgba(255, 245, 247, 0.9);
+            padding: 20px;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            transition: background-color 0.3s ease;
-        }
-
-        nav.scrolled {
-            background-color: rgba(255, 255, 255, 0.95);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 2.5em;
             font-weight: bold;
-            color: #2e7d32;
+            color: #ff809b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
 
-        .nav-links a {
-            color: #2e7d32;
+        nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #ff809b;
             text-decoration: none;
-            margin-left: 2rem;
-            transition: color 0.3s ease;
+            margin: 0 20px;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: #4caf50;
+        nav a:hover {
+            color: #ff4d73;
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            background: url('https://iili.io/FYeZQwB.jpg') no-repeat center center/cover;
-            color: #fff;
+            align-items: center;
             text-align: center;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(46, 125, 50, 0.5);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease-out;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 4em;
+            color: #ff4d73;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.5em;
+            color: #333;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* About Section */
-        .about {
-            max-width: 1200px;
-            margin: 5rem auto;
-            padding: 2rem;
-            background: #fff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease-out;
-        }
-
-        .about.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .about h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #2e7d32;
-        }
-
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .profile-pic {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .profile-pic:hover {
-            transform: scale(1.05);
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            max-width: 1200px;
-            margin: 5rem auto;
-            padding: 2rem;
-        }
-
-        .portfolio h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #2e7d32;
-        }
-
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .gallery-item .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(46, 125, 50, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover .overlay {
-            opacity: 1;
-        }
-
-        .gallery-item .overlay span {
-            color: #fff;
-            font-size: 1.2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        /* Contact Section */
-        .contact {
+            padding: 80px 20px;
             max-width: 1200px;
-            margin: 5rem auto;
-            padding: 2rem;
-            background: #fff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border-radius: 10px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .model-card {
+            background: rgba(255, 245, 247, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transforme: perspective(1000px) rotateY(0deg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: perspective(1000px) rotateY(5deg) scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .model-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .model-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .model-info {
+            padding: 20px;
             text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease-out;
         }
 
-        .contact.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .model-info h3 {
+            color: #ff4d73;
+            font-size: 1.8em;
+            margin-bottom: 10px;
         }
 
-        .contact h2 {
-            margin-bottom: 2rem;
-            color: #2e7d32;
+        .model-info p {
+            color: #555;
         }
 
-        .contact p {
-            margin-bottom: 1rem;
-        }
-
-        .contact a {
-            color: #4caf50;
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff809b, #ff4d73);
+            color: white;
             text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(255, 245, 247, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .contact-section h2 {
+            color: #ff4d73;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .bold-shoot-call {
+            background: linear-gradient(45deg, #ff4d73, #ff809b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.3em;
             font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .contact a:hover {
-            text-decoration: underline;
-        }
-
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -259,188 +191,116 @@
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.5em;
             }
 
-            .nav-links a {
-                margin-left: 1rem;
-            }
-
-            .gallery-item img {
-                height: 200px;
-            }
-
-            .about-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .profile-pic {
-                width: 150px;
-                height: 150px;
+            .gallery {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Navarro Sam</div>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <header>
+        <div class="logo">RiJvi MOdels</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#models">Models</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Navarro Sam</h1>
-            <p>Welcome to my portfolio. Explore my work and get in touch for collaborations.</p>
+        <div>
+            <h1>Welcome to RiJvi MOdels</h1>
+            <p>Discover the epitome of elegance and style with our talented models.</p>
+            <a href="#models" class="cta-button">Explore Our Models</a>
         </div>
     </section>
 
-    <section class="about" id="about">
- <h2>About Me</h2>
-<div class="about-content">
-    <img class="profile-pic" src="https://iili.io/FYeZUGe.md.jpg" alt="Profile Picture">
-    <div class="about-text">
-        <p>I'm Navarro Sam, a professional model with a passion for fashion and photography. With years of experience in runway, editorial, and commercial modeling, I bring versatility and professionalism to every project. My goal is to create captivating visuals that tell a story.</p>
-        <table>
-            <tr>
-                <td><strong>Age:</strong></td>
-                <td>38</td>
-            </tr>
-            <tr>
-                <td><strong>Height:</strong></td>
-                <td>5'2"</td>
-            </tr>
-            <tr>
-                <td><strong>Weight:</strong></td>
-                <td>58</td>
-            </tr>
-            <tr>
-                <td><strong>Location:</strong></td>
-                <td>Dubai</td>
-            </tr>
-            <tr>
-                <td><strong>Hobbies:</strong></td>
-                <td>Traveling</td>
-            </tr>
-        </table>
-    </div>
-</div>
-    </section>
-
-    <section class="portfolio" id="portfolio">
-        <h2>My Portfolio</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="https://iili.io/FYkochP.md.jpg" alt="Portfolio Image 1">
-                <div class="overlay"><span>Editorial Shoot 1</span></div>
+    <section class="gallery" id="models">
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1516726817505-f5ed4e610f36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Model 1">
+            <div class="model-info">
+                <h3>Navarro Sam</h3>
+                <p>Specializing in high-fashion and editorial shoots.</p>
+                <p>Visit: <a href="https://rijvimodels.github.io/Navarro_Sam.html">Portfolio</a><p>
             </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYetqMX.md.jpg" alt="Portfolio Image 2">
-                <div class="overlay"><span>Fashion Runway 1</span></div>
+        </div>
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Model 2">
+            <div class="model-info">
+                <h3>Sofia Lee</h3>
+                <p>Runway expert with a vibrant personality.</p>
             </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYet2up.md.jpg" alt="Portfolio Image 3">
-                <div class="overlay"><span>Commercial Ad 1</span></div>
+        </div>
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Model 3">
+            <div class="model-info">
+                <h3>Luna Marie</h3>
+                <p>Versatile model for commercial and luxury brands.</p>
             </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYetd9R.md.jpg" alt="Portfolio Image 4">
-                <div class="overlay"><span>Portrait Session 1</span></div>
+        </div>
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Model 4">
+            <div class="model-info">
+                <h3>Ava Rose</h3>
+                <p>Known for her captivating editorial presence.</p>
             </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYetH8v.md.jpg" alt="Portfolio Image 5">
-                <div class="overlay"><span>Editorial Shoot 2</span></div>
+        </div>
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Model 5">
+            <div class="model-info">
+                <h3>Isabella Chen</h3>
+                <p>Expert in avant-garde and couture modeling.</p>
             </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYeZDn1.md.jpg" alt="Portfolio Image 6">
-                <div class="overlay"><span>Fashion Runway 2</span></div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYeZLuV.md.jpg" alt="Portfolio Image 7">
-                <div class="overlay"><span>Commercial Ad 2</span></div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYeZ6aj.md.jpg" alt="Portfolio Image 8">
-                <div class="overlay"><span>Portrait Session 2</span></div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYeZyFa.md.jpg" alt="Portfolio Image 9">
-                <div class="overlay"><span>Editorial Shoot 3</span></div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYeZSn9.md.jpg" alt="Portfolio Image 10">
-                <div class="overlay"><span>Fashion Runway 3</span></div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYeZbMF.md.jpg" alt="Portfolio Image 11">
-                <div class="overlay"><span>Commercial Ad 3</span></div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://iili.io/FYeZvZ7.md.jpg" alt="Portfolio Image 12">
-                <div class="overlay"><span>Portrait Session 3</span></div>
+        </div>
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Model 6">
+            <div class="model-info">
+                <h3>Mia Harper</h3>
+                <p>Specializes in commercial and lifestyle campaigns.</p>
             </div>
         </div>
     </section>
 
-    <section class="contact" id="contact">
-        <h2>Contact Me</h2>
-        <p>For bookings and inquiries, reach out via email.</p>
-        <p>Email: <a href="mailto:navarrosam031987@gmail.com">navarrosam031987@gmail.com</a></p>
-        <p>Phone: +971 554267923</p>
+    <section class="contact-section" id="contact">
+        <h2>Contact Us</h2>
+        <div class="bold-shoot-call">
+            <p>We are seeking bold and confident models for an upcoming avant-garde photoshoot! Apply now!</p>
+            <a href="mailto: niloyrahman444@proton.me" class="cta-button">Apply for Bold Shoot</a>
+        </div>
+        <p>Email: <a href="mailto:niloyrahman444@proton.me">info@rijvimodels.com</a></p>
+        <p>Address: Motijhil ,Dhaka</p>
+        <p>Follow us on Facebook: <a href="https://instagram.com/tamanna.tasnim.68406">@rijvimodels</a></p>
     </section>
 
     <script>
-        // Smooth scrolling for nav links
-        document.querySelectorAll('.nav-links a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.add разре: document.addEventListener('click', function(e) {
                 e.preventDefault();
-                const sectionId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(sectionId);
-                if (targetSection) {
-                    window.scrollTo({
-                        top: targetSection.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
             });
         });
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Scroll reveal for sections
-        const sections = document.querySelectorAll('.about, .contact');
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
+        // Parallax effect on model cards
+        document.addEventListener('mousemove', (e) => {
+            document.querySelectorAll('.model-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardCenterX = rect.left + rect.width / 2;
+                const cardCenterY = rect.top + rect.height / 2;
+                const angleX = (e.clientY - cardCenterY) / 50;
+                const angleY = (e.clientX - cardCenterX) / -50;
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1)`;
             });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
         });
     </script>
 </body>
