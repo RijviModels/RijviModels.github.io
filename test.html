@@ -1,0 +1,113 @@
+<!-- admission.html -->
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ভর্তি ফর্ম — পাঠকুটির</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root{
+      --bg:#001a12;
+      --card:#012d20;
+      --accent:#1abc9c;
+      --green1:#2ecc71;
+      --green2:#27ae60;
+      --glass-border:rgba(255,255,255,0.15);
+    }
+    body{
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background:var(--bg);
+      color:#eaf9f0;
+      padding:40px;
+      display:flex;
+      justify-content:center;
+      min-height:100vh;
+    }
+    .wrap{width:100%;max-width:600px}
+    h2{color:var(--green2);margin-bottom:16px;text-align:center}
+    form{
+      background:var(--card);
+      padding:20px;
+      border-radius:14px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.4);
+    }
+    label{font-weight:600;color:var(--green1)}
+    input,select{
+      padding:12px;
+      border-radius:8px;
+      border:1px solid var(--glass-border);
+      background:rgba(255,255,255,0.05);
+      color:#fff;
+      font-size:15px;
+    }
+    input::placeholder{color:#bbb}
+    button{
+      background:var(--accent);
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      font-weight:700;
+      cursor:pointer;
+      color:#002016;
+      font-size:16px;
+      transition:0.3s;
+    }
+    button:hover{background:#16a085}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>ভর্তি ফর্ম</h2>
+    <form onsubmit="sendToTelegram(event)">
+      <label>শিক্ষার্থীর নাম</label>
+      <input type="text" id="name" required>
+
+      <label>ক্লাস</label>
+      <select id="class" required>
+        <option value="">ক্লাস নির্বাচন করুন</option>
+        <option>পঞ্চম</option>
+        <option>ষষ্ঠ</option>
+        <option>সপ্তম</option>
+        <option>অষ্টম</option>
+        <option>নবম</option>
+        <option>দশম</option>
+      </select>
+
+      <label>অভিভাবকের মোবাইল</label>
+      <input type="text" id="phone">
+
+      <label>অতিরিক্ত তথ্য</label>
+      <input type="text" id="note" placeholder="যেমন: দুর্বল বিষয় বা বিশেষ প্রয়োজন">
+
+      <button type="submit">সাবমিট করুন</button>
+    </form>
+  </div>
+
+  <script>
+    function sendToTelegram(e){
+      e.preventDefault();
+      const name=document.getElementById("name").value;
+      const studentClass=document.getElementById("class").value;
+      const phone=document.getElementById("phone").value;
+      const note=document.getElementById("note").value;
+
+      const msg=`ভর্তি ফর্ম\n👤 নাম: ${name}\n📘 ক্লাস: ${studentClass}\n📞 মোবাইল: ${phone}\n✏️ তথ্য: ${note}`;
+
+      const token="7764605417:AAH8vnW9bAqb05fL42bo3NXwhSsOi3vEsYc";  // এখানে আপনার বট টোকেন দিন
+      const chat_id="5275790481";  // এখানে আপনার চ্যাট আইডি দিন
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({chat_id:chat_id,text:msg})
+      }).then(r=>alert("✅ ভর্তি ফর্ম সাবমিট হয়েছে!"))
+      .catch(err=>alert("❌ সমস্যা হয়েছে, আবার চেষ্টা করুন।"));
+    }
+  </script>
+</body>
+</html>
+b
