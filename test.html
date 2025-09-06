@@ -1,4 +1,4 @@
-<!-- admission.html (fixed design + Telegram submit with fallback) -->
+<!-- admission.html (fixed design + Telegram submit with checkbox subjects) -->
 <!doctype html>
 <html lang="bn">
 <head>
@@ -18,7 +18,6 @@
       --maxwidth:720px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
     body{
       font-family: 'Noto Sans Bengali', 'Helvetica Neue', Arial, sans-serif;
       background:
@@ -29,58 +28,30 @@
       padding:28px 18px;
       display:flex;
       justify-content:center;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
     }
-
     .wrap{width:100%;max-width:var(--maxwidth)}
-
     header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:52px;height:52px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#042b24;font-weight:800;font-size:20px;box-shadow:0 8px 30px rgba(0,200,140,0.08)}
+    .logo{width:52px;height:52px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#042b24;font-weight:800;font-size:20px}
     .brand h1{font-size:18px;color:var(--green2)}
-    .brand p{font-size:12px;color:var(--muted);margin-top:2px}
-
-    .btn{background:var(--accent);padding:10px 14px;border-radius:10px;color:#002016;font-weight:700;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(0,200,140,0.18)}
-    .btn.secondary{background:transparent;border:1px solid var(--glass-border);color:var(--green1)}
-
-    .form-card{background:linear-gradient(180deg, rgba(8,22,19,0.55), rgba(5,18,16,0.45));border:1px solid rgba(255,255,255,0.02);padding:22px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
-    .form-card h2{color:var(--green2);margin-bottom:12px;font-size:20px}
-
-    form{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+    .brand p{font-size:12px;color:var(--muted)}
+    .btn{background:var(--accent);padding:10px 14px;border-radius:10px;color:#002016;font-weight:700;border:none;cursor:pointer}
+    .form-card{background:linear-gradient(180deg, rgba(8,22,19,0.55), rgba(5,18,16,0.45));border:1px solid rgba(255,255,255,0.02);padding:22px;border-radius:16px}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     label{display:block;font-size:13px;color:var(--green1);margin-bottom:6px;font-weight:700}
     .full{grid-column:1/-1}
-    input, select, textarea{
-      width:100%;
-      padding:12px;
-      border-radius:10px;
-      border:1px solid var(--glass-border);
-      background:var(--card);
-      color:#eaf9f0;
-      font-size:15px;
-      outline:none;
-      transition:box-shadow .12s, transform .06s;
-    }
-    input::placeholder, textarea::placeholder{color:var(--muted)}
-    input:focus, select:focus, textarea:focus{box-shadow:0 8px 26px rgba(0,200,120,0.08);transform:translateY(-1px);border-color:var(--green1)}
-
-    .note{font-size:13px;color:var(--muted);margin-top:6px}
-
+    input, textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--glass-border);background:var(--card);color:#eaf9f0;font-size:15px;outline:none}
+    textarea{resize:vertical}
+    .checkbox-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+    .checkbox-group label{display:flex;align-items:center;gap:6px;font-weight:500;font-size:14px;color:#dff8ec}
     .submit-wrap{display:flex;gap:12px;align-items:center;margin-top:6px}
-    .submit-btn{background:var(--accent);padding:12px 18px;border:none;border-radius:12px;color:#002016;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,200,140,0.16)}
-    .submit-btn[disabled]{opacity:0.6;cursor:not-allowed}
-
+    .submit-btn,.clear-btn{padding:12px 18px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
+    .submit-btn{background:var(--accent);color:#002016}
+    .clear-btn{background:transparent;border:1px solid var(--green1);color:var(--green1)}
     .status{font-size:14px;color:var(--muted);margin-left:6px}
-
     footer{margin-top:16px;color:var(--muted);text-align:center;font-size:13px}
-
-    /* responsive */
-    @media (max-width:720px){
-      form{grid-template-columns:1fr}
-      header{flex-direction:row;align-items:center}
-      .brand p{display:none}
-      .wrap{padding:0 6px}
-    }
+    @media (max-width:720px){form{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -93,46 +64,55 @@
           <p>“জ্ঞানের পেছনে ছুটো, মার্কস তোমার পেছনে ছুটবে”</p>
         </div>
       </div>
-      <div>
-        <a href="index.html" class="btn">হোম</a>
-      </div>
+      <div><a href="index.html" class="btn">হোম</a></div>
     </header>
 
-    <div class="form-card" role="region" aria-labelledby="formTitle">
-      <h2 id="formTitle">ভর্তি ফর্ম</h2>
-
+    <div class="form-card">
+      <h2>ভর্তি ফর্ম</h2>
       <form id="admissionForm" onsubmit="sendToTelegram(event)" autocomplete="on" novalidate>
         <div class="full">
-          <label for="name">শিক্ষার্থীর নাম</label>
-          <input id="name" name="name" type="text" placeholder="পূর্ণ নাম লিখুন" required>
+          <label for="student">ছাত্র/ছাত্রীর নাম</label>
+          <input id="student" name="student" type="text" required>
         </div>
-
         <div>
-          <label for="class">ক্লাস</label>
-          <select id="class" name="class" required>
-            <option value="">ক্লাস নির্বাচন করুন</option>
-            <option>পঞ্চম</option>
-            <option>ষষ্ঠ</option>
-            <option>সপ্তম</option>
-            <option>অষ্টম</option>
-            <option>নবম</option>
-            <option>দশম</option>
-          </select>
+          <label for="father">বাবার নাম</label>
+          <input id="father" name="father" type="text" required>
         </div>
-
+        <div>
+          <label for="mother">মায়ের নাম</label>
+          <input id="mother" name="mother" type="text" required>
+        </div>
         <div>
           <label for="phone">অভিভাবকের মোবাইল</label>
-          <input id="phone" name="phone" type="tel" placeholder="01XXXXXXXXX (বাংলাদেশ)" required>
+          <input id="phone" name="phone" type="text" required>
         </div>
-
+        <div>
+          <label for="school">বিদ্যালয়ের নাম</label>
+          <input id="school" name="school" type="text" required>
+        </div>
+        <div class="full">
+          <label for="address">ঠিকানা</label>
+          <textarea id="address" name="address" rows="2"></textarea>
+        </div>
+        <div class="full">
+          <label>বিষয় (একাধিক চেকবক্স বেছে নিন)</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="subjects" value="বাংলা"> বাংলা</label>
+            <label><input type="checkbox" name="subjects" value="ইংরেজি"> ইংরেজি</label>
+            <label><input type="checkbox" name="subjects" value="গণিত"> গণিত</label>
+            <label><input type="checkbox" name="subjects" value="বিজ্ঞান"> বিজ্ঞান</label>
+            <label><input type="checkbox" name="subjects" value="আইসিটি"> আইসিটি</label>
+            <label><input type="checkbox" name="subjects" value="ধর্ম"> ধর্ম</label>
+          </div>
+        </div>
         <div class="full">
           <label for="note">অতিরিক্ত তথ্য (ঐচ্ছিক)</label>
-          <textarea id="note" name="note" rows="3" placeholder="যেমন: দুর্বল বিষয় বা বিশেষ প্রয়োজন" style="resize:vertical;"></textarea>
+          <textarea id="note" name="note" rows="3"></textarea>
         </div>
-
         <div class="full submit-wrap">
-          <button id="submitBtn" class="submit-btn" type="submit">সাবমিট করুন</button>
-          <div class="status" id="statusText" aria-live="polite">ফরম পূরণ করে সাবমিট করুন — ডেটা টেলিগ্রামে যাবে।</div>
+          <button id="submitBtn" class="submit-btn" type="submit">সাবমিট</button>
+          <button type="button" class="clear-btn" onclick="form.reset()">ক্লিয়ার</button>
+          <div class="status" id="statusText">ফরম পূরণ করে সাবমিট করুন।</div>
         </div>
       </form>
     </div>
@@ -141,9 +121,8 @@
   </div>
 
   <script>
-    // Replace these with your real bot credentials BEFORE using:
-    const BOT_TOKEN = "7764605417:AAH8vnW9bAqb05fL42bo3NXwhSsOi3vEsYc";
-    const CHAT_ID  = "5275790481";
+    const BOT_TOKEN = "YOUR_BOT_TOKEN"; 
+    const CHAT_ID  = "YOUR_CHAT_ID";    
 
     const form = document.getElementById('admissionForm');
     const statusText = document.getElementById('statusText');
@@ -156,61 +135,47 @@
 
     async function sendToTelegram(e){
       e.preventDefault();
-
-      // simple client-side validation for phone pattern
-      const phoneInput = document.getElementById('phone');
-      if (phoneInput.value.trim() === "" || !phoneInput.checkValidity()){
-        setStatus('দয়া করে সঠিক মোবাইল নম্বর দিন (01XXXXXXXXX)।', false);
-        phoneInput.focus();
-        return;
-      }
-
       submitBtn.disabled = true;
-      setStatus('সাবমিশন প্রক্রিয়াধীন... অনুগ্রহ করে অপেক্ষা করুন।');
+      setStatus('⏳ পাঠানো হচ্ছে...');
 
-      const name = document.getElementById('name').value.trim();
-      const studentClass = document.getElementById('class').value.trim() || 'নির্ধারিত নয়';
-      const phone = phoneInput.value.trim();
-      const note = document.getElementById('note').value.trim() || '-';
+      const student=document.getElementById('student').value.trim();
+      const father=document.getElementById('father').value.trim();
+      const mother=document.getElementById('mother').value.trim();
+      const phone=document.getElementById('phone').value.trim();
+      const school=document.getElementById('school').value.trim();
+      const address=document.getElementById('address').value.trim();
+      const note=document.getElementById('note').value.trim() || "-";
 
-      const message = `ভর্তি ফর্ম\n👤 নাম: ${name}\n📘 ক্লাস: ${studentClass}\n📞 মোবাইল: ${phone}\n✏️ তথ্য: ${note}`;
+      const subjects=[...document.querySelectorAll('input[name="subjects"]:checked')].map(c=>c.value).join(", ") || "-";
 
-      // Try POST first (clean). Note: some browsers may block cross-origin requests (CORS).
-      try {
-        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+      const now=new Date();
+      const dateTime=now.toLocaleString("bn-BD",{timeZone:"Asia/Dhaka"});
+
+      const message=`ভর্তি ফর্ম\n👤 নাম: ${student}\n👨 বাবার নাম: ${father}\n👩 মায়ের নাম: ${mother}\n📞 মোবাইল: ${phone}\n🏫 বিদ্যালয়: ${school}\n🏠 ঠিকানা: ${address}\n📚 বিষয়: ${subjects}\n✏️ তথ্য: ${note}\n⏰ সাবমিশন: ${dateTime}`;
+
+      try{
+        const res=await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({chat_id:CHAT_ID,text:message})
         });
-
-        if (res.ok) {
-          setStatus('✅ ভর্তি ফর্ম সফলভাবে পাঠানো হয়েছে!');
+        if(res.ok){
+          setStatus("ফর্ম সফলভাবে পাঠানো হয়েছে!");
           form.reset();
-        } else {
-          // If API responds but not OK, fallback to GET
-          console.warn('Telegram POST not OK:', res.status);
+        }else{
           fallbackSend(message);
         }
-      } catch (err) {
-        // Likely CORS or network error -> fallback
-        console.warn('POST error:', err);
+      }catch(err){
         fallbackSend(message);
-      } finally {
-        submitBtn.disabled = false;
+      }finally{
+        submitBtn.disabled=false;
       }
     }
 
     function fallbackSend(message){
-      // WARNING: this approach opens a new tab and exposes the bot token in URL.
-      // It's a last-resort fallback if direct POST is blocked by CORS.
-      if (!BOT_TOKEN || !CHAT_ID || BOT_TOKEN.includes('YOUR_') || CHAT_ID.includes('YOUR_')) {
-        setStatus('⚠️ সাবমিশন ব্যর্থ হয়েছে — অনুগ্রহ করে সার্ভার-সাইড বট টোকেন ও চ্যাট আইডি সেট করুন।', false);
-        return;
-      }
-
-      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-      setStatus('✅ বিকল্প উপায়ে টেলিগ্রামে খোলা হয়েছে — যেটি মেসেজ পাঠাবে।');
+      const url=`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+      window.open(url,"_blank");
+      setStatus("⚠ সরাসরি পাঠানো সম্ভব হয়নি, নতুন ট্যাবে বিকল্প পদ্ধতি ব্যবহার করা হচ্ছে।");
       form.reset();
     }
   </script>
